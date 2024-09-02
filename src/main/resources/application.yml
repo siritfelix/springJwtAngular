@@ -1,0 +1,42 @@
+spring:
+  application:
+    name: task
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    defer-datasource-initialization: true
+  datasource:
+    url: jdbc:h2:mem:localdb
+    username: root
+    password: password
+  h2:
+    console:
+      enabled: true
+token:
+  signing:
+    key: 413F4428472B4B6250655368566D5970337336763979244226452948404D6351
+  key: 413F4428472B4B6250655368566D5970337336763979244226452948404D6351
+  jwt-cookie-name: token-cod
+  jwt-refresh-cookie-name: token-refresh-cod
+  expiration-token: 200000
+  expiration-refresh-tokem: 300000
+ms:
+  messages:
+    OK: "respuesta exitosa"
+    OK_RT: "Token actualizado correctamente"
+    OK_LOGOUT: "Logout exitoso"
+    BR400: "Error en el request"
+    S001: "EL token expiro"
+    S002: "Refresh token error is not in database"
+    S003: "Refresh token error Token is empty"
+    E500: "Error interno"
+    F401: "No se encontro el x con id: "
+    E403: "No autorizado"
+    E409: "Ya existe un usuario con el email: "
+    E400: "Error no existe la tarea para ese usuario: "
+    E401: "Error usuario no encontrado"
+    E402: "El titulo no puede estar vacio o nullo"
+    E404: "El campo completada no puede estar vacio o nullo"
+    E405: "El campo prioridad solo admite alta, baja y media"
