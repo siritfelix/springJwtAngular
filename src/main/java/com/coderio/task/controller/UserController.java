@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -19,7 +18,6 @@ import com.coderio.task.service.UserService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 
-@CrossOrigin(origins = "http://localhost:8081", maxAge = 3600, allowCredentials = "true")
 @Tag(name = "Authentication", description = "Authentication catalog")
 @RestController
 @RequestMapping(path = UserController.PATH)
