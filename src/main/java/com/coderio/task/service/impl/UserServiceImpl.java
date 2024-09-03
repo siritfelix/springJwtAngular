@@ -3,6 +3,7 @@ package com.coderio.task.service.impl;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -10,6 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.coderio.task.controller.dto.ResponseDto;
+import com.coderio.task.repository.RefreshTokenRepository;
 import com.coderio.task.repository.UserRepository;
 import com.coderio.task.repository.entity.Role;
 import com.coderio.task.repository.entity.User;
@@ -24,6 +26,7 @@ import lombok.RequiredArgsConstructor;
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final MenssageResponse menssageResponse;
+    private final RefreshTokenRepository refreshTokenRepository;
 
     @Override
     public UserDetailsService userDetailsService() {
@@ -48,7 +51,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResponseDto removById(Integer id) {
-        userRepository.deleteById(id);
+        Optional<User> user = userRepository.findById(id);
+        if (user.isPresent()) {
+            refreshTokenRepository.deleteByUser(user.get());
+            userRepository.deleteById(id);
+        }
         return menssageResponse.getResponseDtoByCode(MenssageResponse.OK);
     }
 
